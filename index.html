@@ -14,7 +14,7 @@
     />
 
     <title>Reflux HTML CSS Template</title>
-<!--
+    <!--
 Reflux Template
 https://templatemo.com/tm-531-reflux
 -->
@@ -37,7 +37,9 @@ https://templatemo.com/tm-531-reflux
           <i class="fa fa-times" id="menu-close"></i>
           <div class="container">
             <div class="image">
-              <a href="#"><img src="assets/images/author-image.jpg" alt="" /></a>
+              <a href="#"
+                ><img src="assets/images/author-image.jpg" alt=""
+              /></a>
             </div>
             <div class="author-content">
               <h4>Reflux Me</h4>
@@ -86,7 +88,8 @@ https://templatemo.com/tm-531-reflux
             <div class="line-dec"></div>
             <span
               >This is a Bootstrap v4.2.1 CSS Template for you. Edit and use
-              this layout for your site. Updated on 21 May 2019 for repeated main menu HTML code.</span
+              this layout for your site. Updated on 21 May 2019 for repeated
+              main menu HTML code.</span
             >
           </div>
           <div class="left-image-post">
@@ -434,7 +437,12 @@ https://templatemo.com/tm-531-reflux
                     </div>
                     <div class="col-md-12">
                       <fieldset>
-                        <button type="submit" id="form-submit" class="button">
+                        <button
+                          type="button"
+                          id="form-submit"
+                          class="button"
+                          onclick="sendEmail()"
+                        >
                           Send Message
                         </button>
                       </fieldset>
@@ -471,7 +479,7 @@ https://templatemo.com/tm-531-reflux
         if (isAnimate) {
           $("body, html").animate(
             {
-              scrollTop: reqSectionPos
+              scrollTop: reqSectionPos,
             },
             800
           );
@@ -481,7 +489,7 @@ https://templatemo.com/tm-531-reflux
       };
 
       var checkSection = function checkSection() {
-        $(".section").each(function() {
+        $(".section").each(function () {
           var $this = $(this),
             topEdge = $this.offset().top - 80,
             bottomEdge = topEdge + $this.height(),
@@ -498,14 +506,81 @@ https://templatemo.com/tm-531-reflux
         });
       };
 
-      $(".main-menu").on("click", "a", function(e) {
+      $(".main-menu").on("click", "a", function (e) {
         e.preventDefault();
         showSection($(this).attr("href"), true);
       });
 
-      $(window).scroll(function() {
+      $(window).scroll(function () {
         checkSection();
       });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js@1.11.0/dist/toastify.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="node_modules/react-toastify/dist/ReactToastify.css"
+    />
+    <script
+      type="text/javascript"
+      src="node_modules/react-toastify/dist/ReactToastify.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js@1.11.0/dist/toastify.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("Jwo8Jvergs2aiHjIX");
+      })();
+    </script>
+    <script type="text/javascript">
+      // Initialize Email.js with your user ID
+      function sendEmail() {
+        emailjs
+          .send("service_ugauc93", "template_adfk5bp", {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            subject: document.getElementById("subject").value,
+            message: document.getElementById("message").value,
+          })
+          .then(
+            function (response) {
+              console.log("SUCCESS", response);
+              document.getElementById("contact").reset();
+              // Show confirmation dialog
+              var confirmation = window.confirm(
+                "Message sent successfully! Do you want to do something else?"
+              );
+
+              // Handle user's choice
+              if (confirmation) {
+                // User clicked OK, you can perform additional actions if needed
+                console.log("User clicked OK");
+              } else {
+                // User clicked Cancel, you can handle this case as well
+                console.log("User clicked Cancel");
+              }
+            },
+            function (error) {
+              console.log("FAILED", error);
+            }
+          );
+      }
     </script>
   </body>
 </html>
